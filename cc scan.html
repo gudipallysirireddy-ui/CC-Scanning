@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Container Vulnerability Scanner UI</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #f5f9ff; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center text-gray-800">
+
+  <!-- Container -->
+  <div class="w-full max-w-lg bg-white shadow-lg rounded-2xl p-8 border border-blue-100">
+    <h1 class="text-2xl font-bold text-blue-700 text-center mb-6">Container Vulnerability Scanner</h1>
+    
+    <!-- Upload Section -->
+    <form class="space-y-6">
+      <div class="border-2 border-dashed border-blue-400 rounded-xl p-8 text-center hover:bg-blue-50 transition">
+        <p class="text-gray-500 mb-3">Upload your container image or configuration file</p>
+        <input 
+          type="file" 
+          class="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 
+                 file:rounded-full file:border-0 file:text-sm file:font-semibold
+                 file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer"
+        />
+      </div>
+
+      <div class="text-center">
+        <button 
+          type="button" 
+          id="scanBtn" 
+          class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow-md transition"
+        >
+          Submit & Scan
+        </button>
+      </div>
+    </form>
+
+    <!-- Results Section (hidden initially) -->
+    <div id="results" class="hidden mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
+      <h2 class="text-lg font-semibold text-blue-800 mb-4">Scan Results</h2>
+
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div class="bg-white rounded-lg p-4 border border-blue-100 shadow-sm">
+          <p class="text-gray-500">Critical Vulnerabilities</p>
+          <p class="text-2xl font-bold text-red-500 mt-1">3</p>
+        </div>
+
+        <div class="bg-white rounded-lg p-4 border border-blue-100 shadow-sm">
+          <p class="text-gray-500">High Vulnerabilities</p>
+          <p class="text-2xl font-bold text-orange-500 mt-1">5</p>
+        </div>
+
+        <div class="bg-white rounded-lg p-4 border border-blue-100 shadow-sm">
+          <p class="text-gray-500">Medium Vulnerabilities</p>
+          <p class="text-2xl font-bold text-yellow-500 mt-1">8</p>
+        </div>
+
+        <div class="bg-white rounded-lg p-4 border border-blue-100 shadow-sm">
+          <p class="text-gray-500">Low Vulnerabilities</p>
+          <p class="text-2xl font-bold text-green-500 mt-1">4</p>
+        </div>
+      </div>
+
+      <div class="mt-6 text-center">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow-md">Download Report</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script: only to toggle results visibility -->
+  <script>
+    const scanBtn = document.getElementById('scanBtn');
+    const results = document.getElementById('results');
+    scanBtn.addEventListener('click', () => {
+      results.classList.remove('hidden');
+      scanBtn.textContent = 'Rescan';
+    });
+  </script>
+
+</body>
+</html>
